@@ -1,6 +1,2 @@
-com\participate\entity\SysMenuRoleEntity.class
-com\participate\App.class
-com\participate\entity\SysMenuEntity.class
 com\participate\controller\SayHelloController.class
-com\participate\entity\SysRoleEntity.class
-com\participate\entity\SysUserEntity.class
+com\participate\App.class
