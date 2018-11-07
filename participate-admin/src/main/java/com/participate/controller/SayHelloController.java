@@ -11,7 +11,7 @@ public class SayHelloController {
     public String sayHello(){
         String aa = SayHello.fyg();
         System.out.println(aa);
-       return null;
+       return aa;
    }
 
 
