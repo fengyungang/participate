@@ -1,2 +1,8 @@
 com\participate\ParticipateApiApplication.class
+com\participate\entity\SysMenuRoleEntity.class
 com\participate\SayHello.class
+com\participate\entity\SysMenuEntity.class
+com\participate\mapper\UserMapper.class
+com\participate\entity\SysRoleEntity.class
+com\participate\entity\SysUserEntity.class
+com\participate\Testdome.class
