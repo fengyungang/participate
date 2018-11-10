@@ -54,5 +54,16 @@ public class Usercontroller {
     public ModelAndView gethtml(){
         return new ModelAndView("index");
     }
+    @RequestMapping("/login")
+    public ModelAndView login(){
+        return new ModelAndView("login");
+    }
+
+    @RequestMapping("/index")
+    public ModelAndView index(){
+        return new ModelAndView("sys/index");
+    }
+
+
 
 }
