@@ -19,4 +19,6 @@ public interface UserMapper {
      * @return
      */
     List<SysUserEntity> getUserList();
+
+    int deleteUser(long id);
 }

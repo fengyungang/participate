@@ -2,7 +2,7 @@
  * Resize function without multiple trigger
  * 
  * Usage:
- * $(window).smartresize(function(){  
+ * $(window).s是martresize(function(){
  *     // code here
  * });
  */

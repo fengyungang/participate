@@ -9,4 +9,6 @@ public interface SysUserService {
     int addUser(SysUserEntity userEntity);
 
     List<SysUserEntity> getUserList();
+
+    int deleteUser(long id);
 }

@@ -23,4 +23,9 @@ public class SysUserServiceImpl implements SysUserService {
     public List<SysUserEntity> getUserList() {
         return userMapper.getUserList();
     }
+
+    @Override
+    public int deleteUser(long id) {
+        return userMapper.deleteUser(id);
+    }
 }

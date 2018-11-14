@@ -6,7 +6,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MenuController {
-
+    /**
+     *      44444
+     * @return
+     */
     @RequestMapping("/getMenu")
     public ModelAndView getMenu(){
         return new ModelAndView("sys/sysmnu");
