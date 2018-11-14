@@ -64,6 +64,11 @@ public class Usercontroller {
         return new ModelAndView("sys/index");
     }
 
+    @RequestMapping("/deleUser")
+    public int deleUser(String id){
+        long i=Long.parseLong(id);
+        return userService.deleteUser(i);
 
+    }
 
 }
