@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.participate.mapper.CustomerMapper">
+<!--添加方法-->
+    <insert id="add">
+        insert into
+        customer(salesman_id,customer_name,customer_phone_number,customer_sex,customer_address,customer_create_time)values(#{salesman_id},#{customer_name},#{customer_phone_number},#{customer_sex},#{customer_address},#{customer_create_time})
+    </insert>
+<!--根据id查询一条信息-->
+    <select id="getById" resultType="com.participate.entity.CustomerModel">
+		SELECT * FROM customer where customer_id = #{customer_id}
+	</select>
+<!--查询所有信息-->
+    <select id="selA" resultType="com.participate.entity.CustomerModel">
+        SELECT customer_id,salesman_id,customer_name,customer_phone_number,customer_sex,customer_address,customer_create_time FROM customer
+        <where>
+            <if test="customer_id != null">
+                and customer_id='${customer_id}'
+            </if>
+            <if test="salesman_id != null">
+                and salesman_id='${salesman_id}''
+            </if>
+            <if test="customer_name != null and customer_name != ''">
+                and customer_name like '%' #{customer_name} '%'
+            </if>
+            <if test="customer_phone_number != null and customer_phone_number != ''">
+                and customer_phone_number like '%' #{customer_phone_number} '%'
+            </if>
+            <if test="customer_sex != null and customer_sex != ''">
+                and customer_sex like '%' #{customer_sex} '%'
+            </if>
+            <if test="customer_address != null and customer_address != ''">
+                and customer_address like '%' #{customer_address} '%'
+            </if>
+            <if test="customer_create_time != null and customer_create_time != ''">
+                and customer_create_time like '%' #{customer_create_time} '%'
+            </if>
+        </where>
+    </select>
+<!--根据id修改某条信息-->
+    <update id="update">
+        update customer
+        <set>
+            <if test="salesman_id != null">
+                salesman_id = #{salesman_id},
+            </if>
+            <if test="customer_name != null">
+                customer_name = #{customer_name},
+            </if>
+            <if test="customer_phone_number != null">
+                customer_phone_number = #{customer_phone_number},
+            </if>
+            <if test="customer_sex != null">
+                customer_sex = #{customer_sex},
+            </if>
+            <if test="customer_address != null">
+                customer_address = #{customer_address},
+            </if>
+            <if test="customer_create_time != null">
+                customer_create_time = #{customer_create_time},
+            </if>
+        </set>
+        where customer_id = #{customer_id}
+    </update>
+
+</mapper>
+
