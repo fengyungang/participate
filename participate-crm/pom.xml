@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>participate-orm</artifactId>
+    <artifactId>participate-crm</artifactId>
 
     <name>orm</name>
     <!-- FIXME change it to the project's website -->

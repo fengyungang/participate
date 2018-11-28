@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.participate.mapper.WordBookMapper">
+<!--添加方法-->
+    <insert id="add">
+        INSERT INTO
+        word_book(customer_id,salesman_id,word_book_contact_state,word_book_customer_satisfaction,word_book_update_time)VALUES(#{customer_id},#{salesman_id},#{word_book_contact_state},#{word_book_customer_satisfaction},#{word_book_update_time})
+    </insert>
+<!--根据id查询一条信息-->
+    <select id="getById" resultType="com.participate.entity.CallLogModel">
+		SELECT * FROM word_book WHERE word_book_id = #{0}
+	</select>
+<!--查询所有信息-->
+    <select id="selA" resultType="com.participate.entity.CallLogModel">
+        SELECT word_book_id,customer_id,salesman_id,word_book_contact_state,word_book_customer_satisfaction,word_book_create_time,word_book_update_time FROM word_book
+        <where>
+            <if test="word_book_id != null">
+                AND word_book_id=#{word_book_id}
+            </if>
+            <if test="customer_id != null">
+                AND customer_id=#{customer_id}
+            </if>
+            <if test="salesman_id != null">
+                AND salesman_id=#{salesman_id}
+            </if>
+            <if test="word_book_contact_state != null">
+                AND word_book_contact_state=#{word_book_contact_state}
+            </if>
+            <if test="word_book_customer_satisfaction != null">
+                AND word_book_customer_satisfaction=#{word_book_customer_satisfaction}
+            </if>
+            <if test="word_book_create_time != null and word_book_create_time != ''">
+                AND word_book_create_time like '%' #{word_book_create_time} '%'
+            </if>
+            <if test="word_book_update_time != null and word_book_update_time != ''">
+                AND word_book_update_time like '%' #{word_book_update_time} '%'
+            </if>
+        </where>
+    </select>
+<!--根据id修改某条信息-->
+    <update id="update">
+        UPDATE word_book
+        <set>
+            <if test="customer_id != null">
+                customer_id = #{customer_id},
+            </if>
+            <if test="salesman_id != null">
+                salesman_id = #{salesman_id},
+            </if>
+            <if test="word_book_contact_state != null">
+                word_book_contact_state = #{word_book_contact_state},
+            </if>
+            <if test="word_book_customer_satisfaction != null">
+                word_book_customer_satisfaction = #{word_book_customer_satisfaction},
+            </if>
+            <if test="word_book_create_time != null">
+                word_book_create_time = #{word_book_create_time},
+            </if>
+            <if test="word_book_update_time != null">
+                word_book_update_time = #{word_book_update_time}
+            </if>
+        </set>
+        WHERE word_book_id = #{word_book_id}
+    </update>
+
+</mapper>
+
