@@ -10,7 +10,7 @@
 		<module>participate-api</module>
 		<module>participate-admin</module>
 		<module>participate-web</module>
-        <module>orm</module>
+        <module>participate-crm</module>
     </modules>
 	<packaging>pom</packaging>
 

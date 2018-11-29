@@ -4,6 +4,7 @@ import com.participate.entity.CustomerModel;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CustomerService {
     /**
@@ -25,12 +26,19 @@ public interface CustomerService {
      * @param customerModel
      * @return
      */
-    List<CustomerModel> selA(CustomerModel customerModel);
+    Map<String,Object> selA(CustomerModel customerModel, Integer pageIndex, Integer pageSize);
 
     /**
      * 根据id修改某条信息
-     * @param customer_id
+     * @param customerModel
      * @return
      */
-    int update(@Param("customer_id") Integer customer_id);
+    int update(CustomerModel customerModel);
+
+    /**
+     * -根据id删除客户信息（物理删除）
+     * @param id
+     * @return
+     */
+    int delById(Integer id);
 }

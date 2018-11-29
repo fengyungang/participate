@@ -9,6 +9,9 @@
 <!--根据id查询一条信息-->
     <select id="getById" resultType="com.participate.entity.CallLogModel">
 		SELECT * FROM call_log WHERE call_log_id = #{0}
+
+
+
 	</select>
 <!--查询所有信息-->
     <select id="selA" resultType="com.participate.entity.CallLogModel">

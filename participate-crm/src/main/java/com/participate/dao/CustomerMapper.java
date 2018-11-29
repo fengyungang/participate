@@ -29,11 +29,17 @@ public interface CustomerMapper {
      * @return
      */
     List<CustomerModel> selA(CustomerModel customerModel);
-
     /**
      * 根据id修改某条信息
-     * @param customer_id
+     * @param customerModel
      * @return
      */
-    int update(@Param("customer_id") Integer customer_id);
+    int update(CustomerModel customerModel);
+
+    /**
+     * -根据id删除客户信息（物理删除）
+     * @param id
+     * @return
+     */
+    int delById(Integer id);
 }

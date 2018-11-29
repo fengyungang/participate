@@ -17,4 +17,5 @@ public class CustomerModel {
     private String customer_sex;//性别
     private String customer_address;//家庭住址
     private Date customer_create_time;//创建时间
+    private Integer customer_del;//删除状态（0是未删除，1是已删除）
 }
