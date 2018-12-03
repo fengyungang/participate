@@ -4,10 +4,12 @@ import com.participate.entity.CallLogModel;
 import com.participate.entity.CustomerModel;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
-@Component
+@Repository
 public interface CustomerMapper {
     /**
      * 添加方法
@@ -18,17 +20,17 @@ public interface CustomerMapper {
 
     /**
      * 根据id查询一条信息
-     * @param id
+     * @param customer_id
      * @return
      */
-    CustomerModel getById(Integer id);
+    CustomerModel getById(Integer customer_id);
 
     /**
      * 查询所有信息
-     * @param customerModel
+     * @param map
      * @return
      */
-    List<CustomerModel> selA(CustomerModel customerModel);
+    List<CustomerModel> selA(Map<String,Object> map);
     /**
      * 根据id修改某条信息
      * @param customerModel

@@ -16,17 +16,19 @@ public interface CustomerService {
 
     /**
      * 根据id查询一条信息
-     * @param id
+     * @param customer_id
      * @return
      */
-    CustomerModel getById(Integer id);
+    CustomerModel getById(Integer customer_id);
 
     /**
      * 查询所有信息
-     * @param customerModel
+     * @param map
+     * @param pageIndex
+     * @param pageSize
      * @return
      */
-    Map<String,Object> selA(CustomerModel customerModel, Integer pageIndex, Integer pageSize);
+    Map<String,Object> selA(Map<String,Object> map, Integer pageIndex, Integer pageSize);
 
     /**
      * 根据id修改某条信息

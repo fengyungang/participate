@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.participate.mapper.SalesmanMapper">
+<mapper namespace="com.participate.dao.SalesmanMapper">
 <!--添加方法-->
     <insert id="add">
         INSERT INTO
-        salesman(salesman_parent_id,salesman_name,salesman_phone_number,salesman_password)VALUES(#{salesman_parent_id},#{salesman_name},#{salesman_phone_number},#{salesman_password})
+        salesman(salesman_parent_id,salesman_name,salesman_phone_number,salesman_password,salesman_create_time)
+        VALUES
+        (#{salesman_parent_id},#{salesman_name},#{salesman_phone_number},#{salesman_password},#{salesman_create_time})
     </insert>
 <!--根据id查询一条信息-->
-    <select id="getById" resultType="com.participate.entity.CallLogModel">
+    <select id="getById" resultType="com.participate.entity.SalesmanModel">
 		SELECT * FROM salesman WHERE salesman_id = #{0}
 	</select>
 <!--查询所有信息-->
-    <select id="selA" resultType="com.participate.entity.CallLogModel">
+    <select id="selA" parameterType="map" resultType="com.participate.entity.SalesmanModel">
         SELECT salesman_id,salesman_parent_id,salesman_name,salesman_phone_number,salesman_password,salesman_create_time FROM salesman
         <where>
             <if test="salesman_id != null">
@@ -21,16 +23,16 @@
                 AND salesman_parent_id=#{salesman_parent_id}
             </if>
             <if test="salesman_name != null and salesman_name != ''">
-                AND salesman_name like '%' #{salesman_name} '%'
+                AND salesman_name like CONCAT('%', #{salesman_name}, '%')
             </if>
             <if test="salesman_phone_number != null and salesman_phone_number != ''">
-                AND salesman_phone_number like '%' #{salesman_phone_number} '%'
+                AND salesman_phone_number like CONCAT('%', #{salesman_phone_number}, '%')
             </if>
             <if test="salesman_password != null and salesman_password != ''">
-                AND salesman_password like '%' #{salesman_password} '%'
+                AND salesman_password like CONCAT('%' ,#{salesman_password} ,'%')
             </if>
             <if test="salesman_create_time != null and salesman_create_time != ''">
-                AND salesman_create_time like '%' #{salesman_create_time} '%'
+                AND salesman_create_time like CONCAT('%', #{salesman_create_time}, '%')
             </if>
         </where>
     </select>
@@ -56,6 +58,9 @@
         </set>
         WHERE salesman_id = #{salesman_id}
     </update>
-
+<!--根据id删除客户信息（物理删除）-->
+    <delete id="delById" parameterType="java.lang.Integer">
+        DELETE FROM salesman WHERE salesman_id = #{0}
+    </delete>
 </mapper>
 

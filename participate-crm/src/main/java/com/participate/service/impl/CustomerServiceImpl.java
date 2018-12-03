@@ -15,6 +15,7 @@ import java.util.Map;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
+
     @Autowired
     private CustomerMapper customerMapper;
 
@@ -30,34 +31,34 @@ public class CustomerServiceImpl implements CustomerService {
 
     /**
      * 根据id查询一条信息
-     * @param id
+     * @param customer_id
      * @return
      */
     @Override
-    public CustomerModel getById(Integer id) {
-        return customerMapper.getById(id);
+    public CustomerModel getById(Integer customer_id) {
+        return customerMapper.getById(customer_id);
     }
 
     /**
      * 查询所有信息
-     * @param customerModel
+     * @param map
      * @param pageIndex
      * @param pageSize
      * @return
      */
     @Override
-    public Map<String,Object> selA(CustomerModel customerModel, Integer pageIndex, Integer pageSize) {
-
-        Map<String,Object> map = new HashMap<>();
+    public Map<String,Object> selA(Map<String,Object> map, Integer pageIndex, Integer pageSize) {
 
         PageHelper.startPage(pageIndex,pageSize);
-        List<CustomerModel> customerModelList = customerMapper.selA(customerModel);
+        List<CustomerModel> customerModelList = customerMapper.selA(map);
         PageInfo<CustomerModel> pageInfo = new PageInfo<>();
         Long num = pageInfo.getTotal();
 
         // 获取分页情况，一共多少页，一页多少数据
         PageBean pageBean = new PageBean(pageIndex,num.intValue(),pageSize);
         pageBean.init();
+        //清空map
+        map.clear();
         map.put("customerModelList",customerModelList);
         map.put("pageBean",pageBean);
         return map;
