@@ -27,7 +27,7 @@ public class SalesmanApi extends BaseApi{
      */
     @ApiOperation(value = "添加销售人员信息",notes = "addSalesman接口的添加销售人员信息方法", produces = "application/json")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "salesman_parent_id", value = "父id（可以为空，当为0时，是组长）", required = false, dataType = "Integer", paramType = "form"),
+            @ApiImplicitParam(name = "salesman_parent_id", value = "身份标识（可以为空，当为0时是组长，为其他值时是所属组长）", required = false, dataType = "Integer", paramType = "form"),
             @ApiImplicitParam(name = "salesman_name", value = "姓名", required = true, dataType = "String", paramType = "form"),
             @ApiImplicitParam(name = "salesman_phone_number", value = "手机号", required = true, dataType = "String", paramType = "form"),
             @ApiImplicitParam(name = "salesman_password", value = "密码", required = true, dataType = "String", paramType = "form")
@@ -90,7 +90,7 @@ public class SalesmanApi extends BaseApi{
      */
     @ApiOperation(value = "查询销售人员列表信息（可按条件模糊查询）",notes = "selASalesman接口的查询销售人员列表信息方法", produces = "application/json")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "salesman_parent_id", value = "父id（可以为空，当为0时，是组长）", required = false, dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "salesman_parent_id", value = "身份标识（可以为空，当为0时是组长，为其他值时是所属组长）", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "salesman_name", value = "姓名", required = false, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "salesman_phone_number", value = "手机号", required = false, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "salesman_password", value = "密码", required = false, dataType = "String", paramType = "query"),
@@ -122,5 +122,47 @@ public class SalesmanApi extends BaseApi{
                                Integer salesman_id)
     {
         return salesmanLogic.selO(salesman_id);
+    }
+
+    /**
+     * 根据身份标识查看所属一个组长的销售人员信息功能(展示组长列表信息)
+     * @param token
+     * @param salesman_parent_id
+     * @param pageIndex
+     * @param pageSize
+     * @return
+     */
+    @ApiOperation(value = "根据身份标识查看所属一个组长的销售人员信息功能(展示组长列表信息)",notes = "leaderGetBySalesman接口的根据身份标识查看所属一个组长的销售人员信息方法(展示组长列表信息)", produces = "application/json")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "salesman_parent_id", value = "身份标识（可以为空，当为0时是组长，为其他值时是所属组长）", required = true, dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
+    })
+    @ResponseBody
+    @GetMapping("/leaderGetBySalesman")
+    public Result leaderGetBySalesman(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
+                                        Integer salesman_parent_id,Integer pageIndex,Integer pageSize)
+    {
+        return salesmanLogic.leaderGetBySalesman(salesman_parent_id,pageIndex,pageSize);
+    }
+
+    /**
+     * 管理员给销售人员分配角色
+     * @param token
+     * @param salesman_id
+     * @param salesman_parent_id
+     * @return
+     */
+    @ApiOperation(value = "管理员给销售人员分配角色",notes = "leaderGiveRole接口的管理员给销售人员分配角色方法", produces = "application/json")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "salesman_id", value = "销售人员信息表主键id", required = true, dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "salesman_parent_id", value = "身份标识（可以为空，当为0时是组长，为其他值时是所属组长）", required = true, dataType = "Integer", paramType = "query")
+    })
+    @ResponseBody
+    @PutMapping("/leaderGiveRole")
+    public Result leaderGiveRole(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
+                                  Integer salesman_id,Integer salesman_parent_id)
+    {
+        return salesmanLogic.leaderGiveRole(salesman_id,salesman_parent_id);
     }
 }

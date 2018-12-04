@@ -91,4 +91,38 @@ public class SalesmanLogic {
         }
         return Result.generate(0,"select salesman success",salesmanService.selA(map,pageIndex,pageSize));
     }
+
+    /**
+     * 根据身份标识查看所属一个组长的销售人员信息功能(展示组长列表信息)
+     * @param salesman_parent_id
+     * @param pageIndex
+     * @param pageSize
+     * @return
+     */
+    public Result leaderGetBySalesman (Integer salesman_parent_id,Integer pageIndex,Integer pageSize){
+        // 设置默认页码每页数量
+        pageIndex = pageIndex==null?1:pageIndex;
+        pageSize = pageSize==null?5:pageSize;
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("salesman_parent_id",salesman_parent_id);
+        return Result.generate(1,"select salesman success",salesmanService.selA(map,pageIndex,pageSize));
+    }
+
+    /**
+     * 管理员给销售人员分配角色
+     * @param salesman_id
+     * @param salesman_parent_id
+     * @return
+     */
+    public Result leaderGiveRole(Integer salesman_id,Integer salesman_parent_id){
+        SalesmanModel salesmanModel = new SalesmanModel();
+        salesmanModel.setSalesman_id(salesman_id);
+        salesmanModel.setSalesman_parent_id(salesman_parent_id);
+        int res = salesmanService.update(salesmanModel);
+        if (res<0){
+            return Result.generate(1,"update salesman fail ",null);
+        }
+        return Result.generate(0,"update salesman success",salesmanModel);
+    }
 }
