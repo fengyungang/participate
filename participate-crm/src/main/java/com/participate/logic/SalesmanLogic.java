@@ -40,7 +40,7 @@ public class SalesmanLogic {
             int res = salesmanService.delById(salesman_id);
             return Result.generate(0,"delete salesman success",res);
         }
-        return Result.generate(0,"delete salesman fail",null);
+        return Result.generate(1,"delete salesman fail",null);
     }
 
     /**
@@ -62,7 +62,10 @@ public class SalesmanLogic {
      * @return
      */
     public Result selO(Integer salesman_id){
-        SalesmanModel salesmanModel = salesmanService.getById(salesman_id);
+        SalesmanModel salesmanModel = new SalesmanModel();
+
+        salesmanModel = salesmanService.getById(salesman_id);
+        salesmanModel.setSalesman_password("");
         return Result.generate(0,"select salesman success",salesmanModel);
     }
 
@@ -106,7 +109,7 @@ public class SalesmanLogic {
 
         Map<String,Object> map = new HashMap<>();
         map.put("salesman_parent_id",salesman_parent_id);
-        return Result.generate(1,"select salesman success",salesmanService.selA(map,pageIndex,pageSize));
+        return Result.generate(0,"select salesman success",salesmanService.selA(map,pageIndex,pageSize));
     }
 
     /**
@@ -125,4 +128,6 @@ public class SalesmanLogic {
         }
         return Result.generate(0,"update salesman success",salesmanModel);
     }
+
+
 }

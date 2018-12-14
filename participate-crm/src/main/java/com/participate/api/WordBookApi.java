@@ -27,10 +27,10 @@ public class WordBookApi extends BaseApi{
      */
     @ApiOperation(value = "新增字典表信息",notes = "addWordBookr接口的添加字典表信息方法", produces = "application/json")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "customer_id", value = "客户表id（关联外键）", required = true, dataType = "Integer", paramType = "form"),
-            @ApiImplicitParam(name = "salesman_id", value = "销售人员id（关联外键", required = false, dataType = "Integer", paramType = "form"),
-            @ApiImplicitParam(name = "word_book_contact_state", value = "联系状态（0未联系，1联系过）", required = true, dataType = "Integer", paramType = "form"),
-            @ApiImplicitParam(name = "word_book_customer_satisfaction", value = "客户满意度（0为最差,0-5）", required = false, dataType = "Integer", paramType = "form")
+            @ApiImplicitParam(name = "word_book_code", value = "字典表编码标识", required = true, dataType = "Integer", paramType = "form"),
+            @ApiImplicitParam(name = "word_book_name", value = "字典表名称/值", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "word_book_type", value = "字典表类型", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "word_book_state", value = "字典表状态", required = false, dataType = "String", paramType = "form")
 
     })
     @ResponseBody
@@ -44,33 +44,31 @@ public class WordBookApi extends BaseApi{
     /**
      * 查询字典表列表信息（可按条件模糊查询）
      * @param token
-     * @param customer_id
-     * @param salesman_id
-     * @param word_book_contact_state
-     * @param word_book_customer_satisfaction
+     * @param word_book_code
+     * @param word_book_name
+     * @param word_book_type
+     * @param word_book_state
      * @param word_book_create_time
-     * @param word_book_update_time
      * @param pageIndex
      * @param pageSize
      * @return
      */
     @ApiOperation(value = "查询字典表列表信息（可按条件模糊查询）",notes = "selAWordBook接口的查询字典表列表信息方法", produces = "application/json")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "customer_id", value = "客户表id（关联外键）", required = false, dataType = "Integer", paramType = "query"),
-            @ApiImplicitParam(name = "salesman_id", value = "销售人员id（关联外键）", required = false, dataType = "Integer", paramType = "query"),
-            @ApiImplicitParam(name = "word_book_contact_state", value = "联系状态（0未联系，1联系过）", required = false, dataType = "Integer", paramType = "query"),
-            @ApiImplicitParam(name = "word_book_customer_satisfaction", value = "客户满意度（0为最差,0-5）", required = false, dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "word_book_code", value = "字典表编码标识", required = false, dataType = "Integer", paramType = "query"),
+            @ApiImplicitParam(name = "word_book_name", value = "字典表名称/值", required = false, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "word_book_type", value = "字典表类型", required = false, dataType = "String", paramType = "query"),
+            @ApiImplicitParam(name = "word_book_state", value = "字典表状态", required = false, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "word_book_create_time", value = "创建时间", required = false, dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name = "word_book_update_time", value = "更新时间", required = false, dataType = "String", paramType = "query"),
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
     @ResponseBody
     @GetMapping("/selAWordBook")
     public Result selAWordBook(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
-                              Integer customer_id, Integer salesman_id, Integer word_book_contact_state,Integer word_book_customer_satisfaction, String word_book_create_time,String word_book_update_time,Integer pageIndex,Integer pageSize)
+                              Integer word_book_code, String word_book_name, String word_book_type,String word_book_state, String word_book_create_time,Integer pageIndex,Integer pageSize)
     {
-        return wordBookLogic.selA(customer_id,salesman_id,word_book_contact_state,word_book_customer_satisfaction,word_book_create_time,word_book_update_time,pageIndex,pageSize);
+        return wordBookLogic.selA(word_book_code,word_book_name,word_book_type,word_book_state,word_book_create_time,pageIndex,pageSize);
     }
 
     /**

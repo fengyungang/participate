@@ -45,4 +45,11 @@ public interface WordBookMapper {
      * @return
      */
     int delById(Integer word_book_id);
+
+    /**
+     * 查询字典信息根据编码
+     * @param word_book_code
+     * @return
+     */
+    WordBookModel getByCode(Integer word_book_code);
 }

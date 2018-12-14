@@ -31,6 +31,13 @@ public interface SalesmanService {
     Map<String,Object> selA(Map<String,Object> map,Integer pageIndex,Integer pageSize);
 
     /**
+     * 查询所有信息（不支持分页）
+     * @param map
+     * @return
+     */
+    List<SalesmanModel> selA(Map<String,Object> map);
+
+    /**
      * 根据id修改某条信息
      * @param salesmanModel
      * @return

@@ -62,6 +62,14 @@ public class WordBookServiceImpl implements WordBookService {
     }
 
     /**
+     * 查询所有信息（不支持分页）
+     * @param map
+     * @return
+     */
+    public List<WordBookModel> selA(Map<String, Object> map){
+        return wordBookMapper.selA(map);
+    }
+    /**
      *  根据id修改某条信息
      * @param wordBookModel
      * @return
@@ -80,4 +88,11 @@ public class WordBookServiceImpl implements WordBookService {
     public int delById(Integer word_book_id) {
         return wordBookMapper.delById(word_book_id);
     }
+
+    @Override
+    public WordBookModel getByCode(Integer word_book_code) {
+        return wordBookMapper.getByCode(word_book_code);
+    }
+
+
 }

@@ -1,17 +1,19 @@
 package com.participate.service.impl;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.participate.dao.CustomerMapper;
 import com.participate.entity.CustomerModel;
+import com.participate.entity.DateStatisticsModel;
+import com.participate.entity.TimeStatisticsModel;
 import com.participate.service.CustomerService;
+import com.participate.utils.DateUtils;
 import com.participate.utils.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -49,9 +51,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Map<String,Object> selA(Map<String,Object> map, Integer pageIndex, Integer pageSize) {
 
-        PageHelper.startPage(pageIndex,pageSize);
+        Page page = PageHelper.startPage(pageIndex,pageSize);
         List<CustomerModel> customerModelList = customerMapper.selA(map);
-        PageInfo<CustomerModel> pageInfo = new PageInfo<>();
+        PageInfo<CustomerModel> pageInfo = new PageInfo<>(page.getResult());
         Long num = pageInfo.getTotal();
 
         // 获取分页情况，一共多少页，一页多少数据
@@ -62,6 +64,15 @@ public class CustomerServiceImpl implements CustomerService {
         map.put("customerModelList",customerModelList);
         map.put("pageBean",pageBean);
         return map;
+    }
+
+    /**
+     * 查询所有信息（不支持分页）
+     * @param map
+     * @return
+     */
+    public List<CustomerModel> selA(Map<String,Object> map){
+        return customerMapper.selA(map);
     }
 
     /**
@@ -82,5 +93,37 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public int delById(Integer id) {
         return customerMapper.delById(id);
+    }
+
+    /**
+     * 查询满意度及数量根据小时
+     * @param date
+     * @return
+     */
+    @Override
+    public List<TimeStatisticsModel> getHourCOUNT(Date date){
+        List<TimeStatisticsModel> timeStatisticsModelList = customerMapper.getHourCOUNT(date);
+        String dateHour = DateUtils.DtS(date,"yyyy-MM-dd HH");
+        date = DateUtils.StD(dateHour,"yyyy-MM-dd HH");
+        for (int i = 0; i < timeStatisticsModelList.size(); i++) {
+             timeStatisticsModelList.get(i).setTime_statistics_time(date);
+        }
+        return timeStatisticsModelList;
+    }
+
+    /**
+     * 查询满意度及数量根据日期
+     * @param date
+     * @return
+     */
+    @Override
+    public List<DateStatisticsModel> getDayCOUNT(Date date){
+        List<DateStatisticsModel> dateStatisticsModelList = customerMapper.getDayCOUNT(date);
+        String day = DateUtils.DtS(date,"yyyy-MM-dd");
+        date = DateUtils.StD(day,"yyyy-MM-dd");
+        for (int i = 0; i < dateStatisticsModelList.size(); i++) {
+             dateStatisticsModelList.get(i).setDate_statistics_time(date);
+        }
+        return dateStatisticsModelList;
     }
 }

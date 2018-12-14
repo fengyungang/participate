@@ -63,6 +63,15 @@ public class CallLogServiceImpl implements CallLogService {
     }
 
     /**
+     * 查询所有信息（不支持分页）
+     * @param map
+     * @return
+     */
+    public List<CallLogModel> selA(Map<String,Object> map) {
+        return callLogMapper.selA(map);
+    }
+
+    /**
      * 根据id修改某条信息
      * @param callLogModel
      * @return

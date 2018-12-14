@@ -2,10 +2,13 @@ package com.participate.dao;
 
 import com.participate.entity.CallLogModel;
 import com.participate.entity.CustomerModel;
+import com.participate.entity.DateStatisticsModel;
+import com.participate.entity.TimeStatisticsModel;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -44,4 +47,18 @@ public interface CustomerMapper {
      * @return
      */
     int delById(Integer id);
+
+    /**
+     * 查询满意度及数量根据小时
+     * @param date
+     * @return
+     */
+    List<TimeStatisticsModel> getHourCOUNT(Date date);
+
+    /**
+     * 查询满意度及数量根据日期
+     * @param date
+     * @return
+     */
+    List<DateStatisticsModel> getDayCOUNT(Date date);
 }

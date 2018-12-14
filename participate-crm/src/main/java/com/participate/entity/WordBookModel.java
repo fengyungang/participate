@@ -11,11 +11,10 @@ import java.util.Date;
 @Data
 public class WordBookModel {
     private Integer word_book_id;//字典表主键id
-    private Integer customer_id;//客户id（关联外键）
-    private Integer salesman_id;//销售人员id（关联外键）
-    private Integer word_book_contact_state;//联系状态（0未联系，1联系过）
-    //很不满意、不满意、一般、满意和很满意1-5
-    private Integer word_book_customer_satisfaction;//客户满意度（1-5）
+    //未联系0，很不满意、不满意、一般、满意和很满意1-5
+    private Integer word_book_code;//字典表编码标识
+    private String word_book_name;//字典表名称/值
+    private String word_book_type;//字典表类型
+    private String word_book_state;//字典表状态
     private Date word_book_create_time;//创建时间
-    private Date word_book_update_time;//更新时间
 }

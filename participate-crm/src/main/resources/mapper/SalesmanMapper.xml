@@ -14,7 +14,7 @@
 	</select>
 <!--查询所有信息-->
     <select id="selA" parameterType="map" resultType="com.participate.entity.SalesmanModel">
-        SELECT salesman_id,salesman_parent_id,salesman_name,salesman_phone_number,salesman_password,salesman_create_time FROM salesman
+        SELECT salesman_id,salesman_parent_id,salesman_name,salesman_phone_number,salesman_create_time FROM salesman
         <where>
             <if test="salesman_id != null">
                 AND salesman_id=#{salesman_id}
@@ -27,9 +27,6 @@
             </if>
             <if test="salesman_phone_number != null and salesman_phone_number != ''">
                 AND salesman_phone_number like CONCAT('%', #{salesman_phone_number}, '%')
-            </if>
-            <if test="salesman_password != null and salesman_password != ''">
-                AND salesman_password like CONCAT('%' ,#{salesman_password} ,'%')
             </if>
             <if test="salesman_create_time != null and salesman_create_time != ''">
                 AND salesman_create_time like CONCAT('%', #{salesman_create_time}, '%')

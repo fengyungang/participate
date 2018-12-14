@@ -99,8 +99,8 @@ public class SalesmanApi extends BaseApi{
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
     @ResponseBody
-    @GetMapping("/selACustomer")
-    public Result selACustomer(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
+    @GetMapping("/selASalesman")
+    public Result selASalesman(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                                Integer salesman_parent_id,String salesman_name,String salesman_phone_number, String salesman_create_time ,Integer pageIndex,Integer pageSize)
     {
         return salesmanLogic.selA(salesman_parent_id,salesman_name,salesman_phone_number,salesman_create_time,pageIndex,pageSize);
@@ -117,8 +117,8 @@ public class SalesmanApi extends BaseApi{
             @ApiImplicitParam(name = "salesman_id", value = "销售人员信息表主键id", required = true, dataType = "Integer", paramType = "query")
     })
     @ResponseBody
-    @GetMapping("/selOCustomer")
-    public Result selOCustomer(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
+    @GetMapping("/selOSalesman")
+    public Result selOSalesman(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                                Integer salesman_id)
     {
         return salesmanLogic.selO(salesman_id);
@@ -165,4 +165,6 @@ public class SalesmanApi extends BaseApi{
     {
         return salesmanLogic.leaderGiveRole(salesman_id,salesman_parent_id);
     }
+
+
 }

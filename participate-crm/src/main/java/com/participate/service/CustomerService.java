@@ -1,8 +1,11 @@
 package com.participate.service;
 
 import com.participate.entity.CustomerModel;
+import com.participate.entity.DateStatisticsModel;
+import com.participate.entity.TimeStatisticsModel;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +34,13 @@ public interface CustomerService {
     Map<String,Object> selA(Map<String,Object> map, Integer pageIndex, Integer pageSize);
 
     /**
+     * 查询所有信息（不支持分页）
+     * @param map
+     * @return
+     */
+    List<CustomerModel> selA(Map<String,Object> map);
+
+    /**
      * 根据id修改某条信息
      * @param customerModel
      * @return
@@ -43,4 +53,18 @@ public interface CustomerService {
      * @return
      */
     int delById(Integer id);
+
+    /**
+     * 查询满意度及数量根据小时
+     * @param date
+     * @return
+     */
+    List<TimeStatisticsModel> getHourCOUNT(Date date);
+
+    /**
+     * 查询满意度及数量根据日期
+     * @param date
+     * @return
+     */
+    List<DateStatisticsModel> getDayCOUNT(Date date);
 }

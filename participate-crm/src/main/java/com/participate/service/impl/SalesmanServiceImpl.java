@@ -63,6 +63,15 @@ public class SalesmanServiceImpl implements SalesmanService {
     }
 
     /**
+     * 查询所有信息（不支持分页）
+     * @param map
+     * @return
+     */
+    public List<SalesmanModel> selA(Map<String, Object> map){
+        return salesmanMapper.selA(map);
+    }
+
+    /**
      * 根据id修改某条信息
      * @param salesmanModel
      * @return

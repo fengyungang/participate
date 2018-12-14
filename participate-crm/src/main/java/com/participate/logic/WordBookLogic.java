@@ -25,7 +25,6 @@ public class WordBookLogic {
      */
     public Result add(WordBookModel wordBookModel){
         wordBookModel.setWord_book_create_time(new Date());
-        wordBookModel.setWord_book_update_time(new Date());
         int res = wordBookService.add(wordBookModel);
         return Result.generate(0,"add wordBook success",wordBookModel);
     }
@@ -42,34 +41,29 @@ public class WordBookLogic {
 
     /**
      * 查询字典表信息列表（可按条件模糊查询）
-     * @param customer_id
-     * @param salesman_id
-     * @param word_book_contact_state
-     * @param word_book_customer_satisfaction
+     * @param word_book_code
+     * @param word_book_name
+     * @param word_book_type
+     * @param word_book_state
      * @param word_book_create_time
-     * @param word_book_update_time
      * @param pageIndex
      * @param pageSize
      * @return
      */
-    public Result selA(Integer customer_id,Integer salesman_id,Integer word_book_contact_state ,Integer word_book_customer_satisfaction,String word_book_create_time,String word_book_update_time,Integer pageIndex,Integer pageSize){
+    public Result selA(Integer word_book_code,String word_book_name,String word_book_type ,String word_book_state,String word_book_create_time,Integer pageIndex,Integer pageSize){
         // 设置默认页码每页数量
         pageIndex = pageIndex==null?1:pageIndex;
         pageSize = pageSize==null?5:pageSize;
 
         Map<String,Object> map = new HashMap<>();
 
-        map.put("customer_id",customer_id);
-        map.put("salesman_id",salesman_id);
-        map.put("word_book_contact_state",word_book_contact_state);
-        map.put("word_book_customer_satisfaction",word_book_customer_satisfaction);
+        map.put("word_book_code",word_book_code);
+        map.put("word_book_name",word_book_name);
+        map.put("word_book_type",word_book_type);
+        map.put("word_book_state",word_book_state);
         if (word_book_create_time!=null&&!"".equals(word_book_create_time)){
             //传入格式 yyyy-MM-dd，判断是否为空，空指针
             map.put("word_book_create_time", DateUtils.StD(word_book_create_time,"yyyy-MM-dd"));
-        }
-        if (word_book_update_time!=null&&!"".equals(word_book_update_time)){
-            //传入格式 yyyy-MM-dd，判断是否为空，空指针
-            map.put("word_book_update_time", DateUtils.StD(word_book_update_time,"yyyy-MM-dd"));
         }
         return Result.generate(0,"select wordBook success",wordBookService.selA(map,pageIndex,pageSize));
     }
@@ -80,7 +74,6 @@ public class WordBookLogic {
      * @return
      */
     public Result update(WordBookModel wordBookModel){
-        wordBookModel.setWord_book_update_time(new Date());
         int res =  wordBookService.update(wordBookModel);
         if (res<0){
             return Result.generate(1,"update wordBook fail ",null);
